@@ -156,10 +156,3 @@ Potential extensions include:
 * Nextflow workflow implementation
 * Docker containerization
 
----
-
-## Author
-
-Siyun Park
-
-Bioinformatics | Computational Biology | Genomics
