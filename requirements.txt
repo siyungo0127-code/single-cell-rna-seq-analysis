@@ -1,0 +1,13 @@
+scanpy
+anndata
+pandas
+numpy
+matplotlib
+seaborn
+scipy
+scikit-learn
+harmonypy
+leidenalg
+igraph
+jupyter
+nbconvert

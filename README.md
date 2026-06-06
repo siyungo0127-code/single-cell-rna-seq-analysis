@@ -1,158 +1,150 @@
-# Single-Cell RNA Sequencing Analysis Pipeline
+# Single-Cell RNA-seq Analysis of Normal and cSCC Samples
+
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Scanpy](https://img.shields.io/badge/Scanpy-scRNA--seq-green)
+![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-orange)
+![Status](https://img.shields.io/badge/status-in%20development-lightgrey)
+
+## Table of Contents
+
+- [Project Overview](#project-overview)
+- [Workflow](#workflow)
+- [Repository Structure](#repository-structure)
+- [Skills Demonstrated](#skills-demonstrated)
+- [Reproducibility Notes](#reproducibility-notes)
+- [Future Improvements](#future-improvements)
 
 ## Project Overview
 
-This repository contains a complete single-cell RNA sequencing (scRNA-seq) analysis workflow developed using Python and Scanpy.
+This repository contains a single-cell RNA sequencing (scRNA-seq) analysis workflow developed in Python using Scanpy. The project focuses on patient-derived normal and cutaneous squamous cell carcinoma (cSCC) samples and demonstrates how single-cell transcriptomic data can be processed, quality-controlled, clustered, and explored for marker gene patterns.
 
-The project demonstrates essential bioinformatics skills including:
+The guiding biological question is:
 
-* Quality Control (QC)
-* Cell and gene filtering
-* Data normalization
-* Dimensionality reduction
-* Clustering
-* Data visualization
-* Biological interpretation of single-cell transcriptomic data
+> How can scRNA-seq analysis be used to compare cellular heterogeneity between normal skin-associated samples and cSCC-associated samples?
 
-The analysis was performed as part of a bioinformatics coursework project and highlights reproducible computational approaches commonly used in modern genomics research.
+Single-cell RNA-seq is appropriate for this question because bulk RNA-seq averages gene expression across mixed cell populations. In contrast, scRNA-seq enables analysis at cell-level resolution, making it possible to explore differences in cell states, clusters, and marker gene expression across normal and disease-associated samples.
 
----
+The dataset currently referenced in the notebooks includes multiple patient-derived samples labelled as normal or cSCC. Raw data files are not committed to this repository, and the dataset source still needs to be documented fully before the project can be considered reproducible end to end.
 
-## Objectives
+## Workflow
 
-The main objectives of this project were:
+The analysis is organized around a standard scRNA-seq workflow:
 
-1. Perform quality control and filtering of raw scRNA-seq data.
-2. Justify filtering thresholds based on data distributions.
-3. Apply normalization techniques to reduce technical variability.
-4. Explore cellular heterogeneity using dimensionality reduction methods.
-5. Generate interpretable visualizations for downstream biological analysis.
+1. **Quality Control**
+   - Calculate cell-level QC metrics.
+   - Inspect detected genes per cell, total counts, and mitochondrial gene percentage.
+   - Visualize QC distributions to identify low-quality cells and potential outliers.
 
----
+2. **Filtering**
+   - Apply thresholds to remove likely empty droplets, low-quality cells, stressed cells, and potential doublets.
+   - Use QC plots to justify filtering decisions.
 
-## Dataset
+3. **Normalization**
+   - Normalize counts to account for sequencing depth differences between cells.
+   - Apply log transformation for downstream analysis and visualization.
 
-The dataset consists of multiple patient-derived samples containing normal and disease-associated tissues.
+4. **Dimensionality Reduction**
+   - Use principal component analysis (PCA) to summarize major axes of variation.
+   - Use UMAP to visualize cell-level transcriptomic structure in two dimensions.
 
-Samples included:
+5. **Clustering**
+   - Construct a nearest-neighbor graph.
+   - Apply graph-based clustering to identify putative cell populations or cell states.
+   - Compare clustering behavior across resolution settings.
 
-* P2_normal
-* P2_cSCC
-* P3_normal
-* P3_cSCC1
-* P3_cSCC2
-* P4_normal
-* P4_cSCC1
-* P4_cSCC2
-* P5_normal
-* P5_cSCC
+6. **Marker Gene Analysis**
+   - Identify genes associated with clusters.
+   - Use marker gene expression patterns to support biological interpretation.
+   - Avoid over-interpreting annotations until marker evidence and dataset metadata are fully documented.
 
----
+## Repository Structure
 
-## Methods
+```text
+single-cell-rna-seq-analysis/
+├── README.md
+├── requirements.txt
+├── data/
+│   └── README.md
+├── docs/
+│   └── methodology.md
+├── notebooks/
+│   ├── 01_qc_filtering_normalization.ipynb
+│   └── 02_downstream_analysis.ipynb
+├── reports/
+│   ├── 01_QC_Filtering_Normalization.html
+│   └── 02_Downstream_Analysis.html
+└── results/
+    ├── figures/
+    └── tables/
+```
 
-### 1. Quality Control
+### `notebooks/`
 
-Quality control metrics were calculated for:
+Contains the Jupyter notebooks for the analysis workflow:
 
-* Number of detected genes per cell
-* Total UMI counts per cell
-* Percentage of mitochondrial genes
+- `01_qc_filtering_normalization.ipynb`: data loading, QC, filtering, normalization, and early dimensionality reduction.
+- `02_downstream_analysis.ipynb`: downstream analysis steps including clustering, differential expression and marker gene exploration.
 
-Cells with abnormal characteristics were removed to reduce technical noise and low-quality observations.
+### `reports/`
 
-### 2. Filtering
+Contains exported report files intended for easier review outside Jupyter. The current HTML files are placeholders and should be regenerated from the notebooks after the analysis is cleaned and rerun.
 
-Filtering thresholds were selected after inspecting QC metric distributions.
+### `results/`
 
-The filtering strategy aimed to:
+Reserved for exported figures and tables generated from the analysis. This keeps final outputs separate from notebooks and makes the repository easier to review.
 
-* Remove likely empty droplets
-* Remove damaged cells
-* Reduce doublets
-* Improve downstream clustering performance
+### `data/`
 
-### 3. Normalization
+Documents the data policy for this repository. Raw and processed data files are not committed because single-cell datasets are often large and should be downloaded from their original source when possible.
 
-Library-size normalization was applied to account for sequencing depth differences across cells.
+## Skills Demonstrated
 
-Log-transformation was then used to stabilize variance and improve comparability across samples.
+This project demonstrates practical skills relevant to bioinformatics, computational biology, and data science roles:
 
-### 4. Dimensionality Reduction
+- **Single-cell RNA-seq analysis** using a standard Scanpy-based workflow.
+- **Python programming** for biological data analysis.
+- **AnnData/Scanpy workflows** for preprocessing, QC, normalization, clustering, and visualization.
+- **Data visualization** using Scanpy, Matplotlib, and Seaborn.
+- **Dimensionality reduction** with PCA and UMAP.
+- **Graph-based clustering** using nearest-neighbor graphs and Leiden clustering.
+- **Differential expression and marker gene analysis** for cluster-level interpretation.
+- **Scientific communication** through notebooks, reports, and structured documentation.
 
-The following methods were applied:
+## Reproducibility Notes
 
-* Principal Component Analysis (PCA)
-* UMAP
+This repository is being improved for professional portfolio use, but it should not yet be described as fully reproducible.
 
-These approaches were used to visualize transcriptional heterogeneity across cells.
+Current limitations:
 
-### 5. Clustering
+- Raw input data files are not included in the repository.
+- Dataset accession numbers, source links, and download instructions still need to be documented.
+- Some notebook cells currently reference local file paths from the original analysis environment.
+- The exported HTML reports need to be regenerated.
+- The notebooks should be rerun from top to bottom in a clean environment after paths and dependencies are finalized.
 
-Cell populations were identified using graph-based clustering approaches implemented in Scanpy.
-
----
-
-## Software
-
-* Python 3.10
-* Scanpy
-* Pandas
-* NumPy
-* Matplotlib
-* Seaborn
-
----
-
-## Key Skills Demonstrated
-
-### Bioinformatics
-
-* Single-cell RNA-seq analysis
-* Transcriptomics
-* Quality control
-* Data normalization
-* Exploratory data analysis
-
-### Programming
-
-* Python
-* Data visualization
-* Reproducible computational workflows
-
-### Data Science
-
-* High-dimensional data analysis
-* Statistical preprocessing
-* Biological data interpretation
-
----
-
-## Reproducibility
-
-Install dependencies:
+To install the current expected Python dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run notebooks:
+To open the notebooks locally:
 
 ```bash
 jupyter notebook
 ```
 
----
+Full reproducibility will require documented data access, stable relative paths, a clean environment setup, and successful execution of the notebooks from start to finish.
 
 ## Future Improvements
 
-Potential extensions include:
+Planned improvements include:
 
-* Differential expression analysis
-* Cell type annotation
-* Trajectory inference
-* Batch correction
-* Integration of multiple datasets
-* Nextflow workflow implementation
-* Docker containerization
-
+- Document the dataset source, accession identifiers, and download steps.
+- Replace local absolute paths with relative paths or configurable input paths.
+- Regenerate HTML reports from cleaned notebooks.
+- Export key plots to `results/figures/` and summary tables to `results/tables/`.
+- Add clearer marker gene evidence for any cell type annotations.
+- Add a concise project summary figure for quick GitHub and LinkedIn review.
+- Consider adding an `environment.yml` or Dockerfile for stronger reproducibility.
+- Extend the analysis with batch correction, cell type annotation, and differential abundance analysis where supported by the dataset.

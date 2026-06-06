@@ -1,0 +1,38 @@
+# macOS
+.DS_Store
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+*.egg-info/
+
+# Bioinformatics data files
+*.h5ad
+*.h5
+*.loom
+*.rds
+
+# Local data directories
+raw/
+processed/
+data/raw/
+data/processed/
+
+# Generated logs and temporary files
+*.log
+*.tmp
+*.temp
