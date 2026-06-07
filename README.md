@@ -60,13 +60,21 @@ The analysis is organized around a standard scRNA-seq workflow:
 
 ## Representative Output
 
-The QC metrics figure has been generated from the active cSCC notebook and is available under `results/figures/`.
+The active cSCC notebook now runs successfully from top to bottom. The HTML report has been regenerated at `reports/01_QC_Filtering_Normalization.html`, and the following representative figures are available under `results/figures/`.
 
 ![QC metrics by condition](results/figures/01_qc_metrics_by_condition.png)
 
 *QC metrics by condition, showing detected genes per cell, total counts, and mitochondrial read percentage for normal and cSCC-labelled samples.*
 
-Downstream UMAP and cell type composition figures are planned after full notebook execution is completed. The notebook includes a safe PCA fallback for the Harmony integration step: if Harmony fails or produces an invalid embedding, downstream neighbor graph and UMAP steps can continue from PCA coordinates.
+![UMAP by condition and patient](results/figures/02_umap_condition_patient.png)
+
+*UMAP views coloured by condition and patient/sample metadata to support visual inspection of sample structure after preprocessing.*
+
+![Cell type composition by condition](results/figures/03_celltype_composition_normal_vs_cscc.png)
+
+*Cell type composition summary for normal and cSCC-labelled samples. Downstream biological interpretation should be treated cautiously because cell type annotations require manual marker review.*
+
+The notebook includes a safe PCA fallback for the Harmony integration step: if Harmony fails or produces an invalid embedding, downstream neighbor graph and UMAP steps can continue from PCA coordinates.
 
 ## Repository Structure
 
@@ -89,7 +97,9 @@ single-cell-rna-seq-analysis/
 │   └── 01_QC_Filtering_Normalization.html
 └── results/
     ├── figures/
-    │   └── 01_qc_metrics_by_condition.png
+    │   ├── 01_qc_metrics_by_condition.png
+    │   ├── 02_umap_condition_patient.png
+    │   └── 03_celltype_composition_normal_vs_cscc.png
     └── tables/
 ```
 
@@ -112,7 +122,7 @@ Contains material that is preserved but no longer part of the active cSCC workfl
 
 Contains exported report files intended for easier review outside Jupyter:
 
-- `01_QC_Filtering_Normalization.html`: active cSCC report placeholder to regenerate after the active analysis is cleaned and rerun.
+- `01_QC_Filtering_Normalization.html`: regenerated HTML report for the active cSCC notebook.
 
 ### `results/`
 
@@ -143,10 +153,9 @@ Current limitations:
 
 - Raw input data files are not included in the repository.
 - Dataset accession numbers, source links, and download instructions still need to be documented.
-- The QC figure has been generated, but the full notebook has not yet completed successfully end to end.
-- Downstream UMAP and composition figures are planned after full notebook execution.
-- The exported HTML report needs to be regenerated after successful full execution.
-- The notebook includes configurable input paths and a Harmony-to-PCA fallback, but the downstream biological interpretation still needs manual review before conclusions are stated.
+- The active notebook now runs successfully from top to bottom in the project environment.
+- The exported HTML report has been regenerated after successful full execution.
+- The notebook includes configurable input paths and a Harmony-to-PCA fallback, but downstream biological interpretation should still be treated cautiously because cell type annotations require manual marker review.
 
 To install the current expected Python dependencies:
 
@@ -167,8 +176,6 @@ Full reproducibility will require documented data access, stable relative paths,
 Planned improvements include:
 
 - Document the dataset source, accession identifiers, and download steps.
-- Complete full notebook execution and regenerate the active HTML report.
-- Export downstream UMAP and composition plots to `results/figures/` and summary tables to `results/tables/`.
 - Add clearer marker gene evidence for any cell type annotations.
 - Add a concise project summary figure for quick GitHub and LinkedIn review.
 - Consider adding an `environment.yml` or Dockerfile for stronger reproducibility.
