@@ -1,4 +1,4 @@
-# Single-Cell RNA-seq Analysis of Normal and cSCC Samples
+# cSCC Single-Cell RNA-seq Analysis
 
 ![Python](https://img.shields.io/badge/Python-3.x-blue)
 ![Scanpy](https://img.shields.io/badge/Scanpy-scRNA--seq-green)
@@ -16,7 +16,7 @@
 
 ## Project Overview
 
-This repository contains a single-cell RNA sequencing (scRNA-seq) analysis workflow developed in Python using Scanpy. The project focuses on patient-derived normal and cutaneous squamous cell carcinoma (cSCC) samples and demonstrates how single-cell transcriptomic data can be processed, quality-controlled, clustered, and explored for marker gene patterns.
+This repository contains a focused single-cell RNA sequencing (scRNA-seq) portfolio project developed in Python using Scanpy. The project compares patient-derived normal skin-associated samples with cutaneous squamous cell carcinoma (cSCC) samples and demonstrates how single-cell transcriptomic data can be processed, quality-controlled, clustered, and explored for marker gene patterns.
 
 The guiding biological question is:
 
@@ -24,7 +24,7 @@ The guiding biological question is:
 
 Single-cell RNA-seq is appropriate for this question because bulk RNA-seq averages gene expression across mixed cell populations. In contrast, scRNA-seq enables analysis at cell-level resolution, making it possible to explore differences in cell states, clusters, and marker gene expression across normal and disease-associated samples.
 
-The dataset currently referenced in the notebooks includes multiple patient-derived samples labelled as normal or cSCC. Raw data files are not committed to this repository, and the dataset source still needs to be documented fully before the project can be considered reproducible end to end.
+The dataset currently referenced in the active notebook includes multiple patient-derived samples labelled as normal or cSCC. Raw data files are not committed to this repository, and the dataset source still needs to be documented fully before the project can be considered reproducible end to end.
 
 ## Workflow
 
@@ -63,16 +63,18 @@ The analysis is organized around a standard scRNA-seq workflow:
 single-cell-rna-seq-analysis/
 ├── README.md
 ├── requirements.txt
+├── archive/
+│   ├── 02_downstream_analysis_mouse_hematopoiesis.ipynb
+│   └── 02_downstream_analysis_mouse_hematopoiesis.html
 ├── data/
 │   └── README.md
 ├── docs/
-│   └── methodology.md
+│   ├── methodology.md
+│   └── future_repo_plan.md
 ├── notebooks/
-│   ├── 01_qc_filtering_normalization.ipynb
-│   └── 02_downstream_analysis.ipynb
+│   └── 01_qc_filtering_normalization.ipynb
 ├── reports/
-│   ├── 01_QC_Filtering_Normalization.html
-│   └── 02_Downstream_Analysis.html
+│   └── 01_QC_Filtering_Normalization.html
 └── results/
     ├── figures/
     └── tables/
@@ -83,11 +85,21 @@ single-cell-rna-seq-analysis/
 Contains the Jupyter notebooks for the analysis workflow:
 
 - `01_qc_filtering_normalization.ipynb`: data loading, QC, filtering, normalization, and early dimensionality reduction.
-- `02_downstream_analysis.ipynb`: downstream analysis steps including clustering, differential expression and marker gene exploration.
+
+An unrelated exploratory mouse hematopoiesis notebook has been moved to `archive/` pending migration to a separate repository.
+
+### `archive/`
+
+Contains material that is preserved but no longer part of the active cSCC workflow:
+
+- `02_downstream_analysis_mouse_hematopoiesis.ipynb`: exploratory mouse hematopoiesis analysis based on GEO series `GSE107727`.
+- `02_downstream_analysis_mouse_hematopoiesis.html`: legacy exported report for the archived mouse hematopoiesis notebook.
 
 ### `reports/`
 
-Contains exported report files intended for easier review outside Jupyter. The current HTML files are placeholders and should be regenerated from the notebooks after the analysis is cleaned and rerun.
+Contains exported report files intended for easier review outside Jupyter:
+
+- `01_QC_Filtering_Normalization.html`: active cSCC report placeholder to regenerate after the active analysis is cleaned and rerun.
 
 ### `results/`
 

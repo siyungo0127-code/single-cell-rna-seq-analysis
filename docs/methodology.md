@@ -1,13 +1,20 @@
 # Methodology
 
-This project is intended to follow a standard single-cell RNA-seq analysis workflow:
+This project follows a focused cSCC single-cell RNA-seq workflow comparing patient-derived normal skin-associated samples with cutaneous squamous cell carcinoma samples.
 
-1. Quality control
-2. Cell and gene filtering
-3. Normalization and log transformation
-4. Dimensionality reduction
-5. Clustering
-6. Marker gene analysis
-7. Biological interpretation
+The active analysis is contained in `notebooks/01_qc_filtering_normalization.ipynb` and is intended to cover:
 
-This document can be expanded with dataset-specific decisions, parameter choices, and rationale as the repository is refined.
+1. Loading normal and cSCC sample-level AnnData objects
+2. Adding patient, sample, and condition metadata
+3. Calculating cell-level quality control metrics
+4. Filtering low-quality cells, stressed cells, and likely outliers
+5. Normalizing total counts and applying log transformation
+6. Selecting highly variable genes
+7. Running PCA, neighborhood graph construction, UMAP, and Leiden clustering
+8. Comparing integrated and non-integrated embeddings where supported by dependencies
+9. Identifying marker genes for cluster interpretation
+10. Comparing cell type composition between normal and cSCC samples
+
+An unrelated mouse hematopoiesis trajectory notebook has been archived and is not part of this cSCC methodology.
+
+This document can be expanded with cSCC-specific dataset provenance, parameter choices, filtering rationale, marker evidence, and interpretation as the repository is refined.
