@@ -9,6 +9,7 @@
 
 - [Project Overview](#project-overview)
 - [Workflow](#workflow)
+- [Representative Output](#representative-output)
 - [Repository Structure](#repository-structure)
 - [Skills Demonstrated](#skills-demonstrated)
 - [Reproducibility Notes](#reproducibility-notes)
@@ -57,10 +58,21 @@ The analysis is organized around a standard scRNA-seq workflow:
    - Use marker gene expression patterns to support biological interpretation.
    - Avoid over-interpreting annotations until marker evidence and dataset metadata are fully documented.
 
+## Representative Output
+
+The QC metrics figure has been generated from the active cSCC notebook and is available under `results/figures/`.
+
+![QC metrics by condition](results/figures/01_qc_metrics_by_condition.png)
+
+*QC metrics by condition, showing detected genes per cell, total counts, and mitochondrial read percentage for normal and cSCC-labelled samples.*
+
+Downstream UMAP and cell type composition figures are planned after full notebook execution is completed. The notebook includes a safe PCA fallback for the Harmony integration step: if Harmony fails or produces an invalid embedding, downstream neighbor graph and UMAP steps can continue from PCA coordinates.
+
 ## Repository Structure
 
 ```text
 single-cell-rna-seq-analysis/
+├── LICENSE
 ├── README.md
 ├── requirements.txt
 ├── archive/
@@ -77,6 +89,7 @@ single-cell-rna-seq-analysis/
 │   └── 01_QC_Filtering_Normalization.html
 └── results/
     ├── figures/
+    │   └── 01_qc_metrics_by_condition.png
     └── tables/
 ```
 
@@ -130,9 +143,10 @@ Current limitations:
 
 - Raw input data files are not included in the repository.
 - Dataset accession numbers, source links, and download instructions still need to be documented.
-- Some notebook cells currently reference local file paths from the original analysis environment.
-- The exported HTML reports need to be regenerated.
-- The notebooks should be rerun from top to bottom in a clean environment after paths and dependencies are finalized.
+- The QC figure has been generated, but the full notebook has not yet completed successfully end to end.
+- Downstream UMAP and composition figures are planned after full notebook execution.
+- The exported HTML report needs to be regenerated after successful full execution.
+- The notebook includes configurable input paths and a Harmony-to-PCA fallback, but the downstream biological interpretation still needs manual review before conclusions are stated.
 
 To install the current expected Python dependencies:
 
@@ -153,9 +167,8 @@ Full reproducibility will require documented data access, stable relative paths,
 Planned improvements include:
 
 - Document the dataset source, accession identifiers, and download steps.
-- Replace local absolute paths with relative paths or configurable input paths.
-- Regenerate HTML reports from cleaned notebooks.
-- Export key plots to `results/figures/` and summary tables to `results/tables/`.
+- Complete full notebook execution and regenerate the active HTML report.
+- Export downstream UMAP and composition plots to `results/figures/` and summary tables to `results/tables/`.
 - Add clearer marker gene evidence for any cell type annotations.
 - Add a concise project summary figure for quick GitHub and LinkedIn review.
 - Consider adding an `environment.yml` or Dockerfile for stronger reproducibility.
